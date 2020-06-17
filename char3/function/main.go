@@ -75,7 +75,7 @@ func (mainF MainHandle) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func mainHandleFunc(handler func(http.ResponseWriter, *http.Request)) http.Handler {
 	fmt.Println("hi interface")
-	return MainHandle(handler) //这里的写法等价于下面，只是下面更加好理解
+	return MainHandle(handler) //这里的写法等价于下面，只是下面更加好理解：实质上相当于类型断言：如果匹配则返回对应的类型【所以这样的写法没问题】
 	//return (MainHandle)(handler) //因为Mainhandle实现来Http的Handler接口
 	//问题在于此时的函数类型直接调用的形式难道不是函数调用么？
 	//牛逼：此处相当于是函数handler（作为参数传递来的）进行类型转化【而不是函数调用，因为此处只有函数的命名类型，在golang的类型系统中
